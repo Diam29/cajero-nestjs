@@ -1,0 +1,35 @@
+[
+  {
+    "id": "123abC",
+    "name": "Juan",
+    "lastName": "Gonzalez",
+    "dni": 12345678,
+    "key": 9876,
+    "numCuenta": "47983274120",
+    "deposito": 350,
+    "extraccion": 100,
+    "saldoTotal": 3762.34
+  },
+  {
+    "id": "246cdE",
+    "name": "María",
+    "lastName": "Perez",
+    "dni": 87654321,
+    "key": 5678,
+    "numCuenta": "93023982732",
+    "deposito": 150,
+    "extraccion": 1001.9,
+    "saldoTotal": 948.4399999999999
+  },
+  {
+    "id": "369fgH",
+    "name": "Pedro",
+    "lastName": "Lopez",
+    "dni": 56781234,
+    "key": 3456,
+    "numCuenta": "789423899129",
+    "deposito": 300,
+    "extraccion": 100,
+    "saldoTotal": 1700
+  }
+]
