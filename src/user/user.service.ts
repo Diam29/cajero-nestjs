@@ -9,14 +9,32 @@ import { ExtraccionDto } from './dto/extraccion.dto';
 export class UserService {
   private userFilePath = path.resolve(__dirname, '../../src/users/dataUser.json')
 
+  private async readFileAsync(filePath: string): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(JSON.parse(data));
+        }
+      });
+    });
+  }
 
   // Buscar Usuario por id
   async findUser(id: string) {
-    const user = dataUser.find(user => user.id === id)
+    try {
+      const data = await this.readFileAsync(this.userFilePath)
+      const user = data.find(user => user.id === id)
 
-    if (!user) throw new NotFoundException('Usuario no encontrado')
-
-    return user
+      if (!user) {
+        throw new NotFoundException('Usuario no encontrado')
+      }
+      console.log('user get id', user)
+      return user
+    } catch (error) {
+      throw new InternalServerErrorException('Error al buscar usuario');
+    }
   }
 
 
@@ -24,7 +42,6 @@ export class UserService {
   async findBalance(id: string) {
     try {
       const loggerUser = await this.findUser(id);
-
       if (!loggerUser.saldoTotal || typeof loggerUser.saldoTotal !== 'number') {
         throw new InternalServerErrorException('El saldo no está disponible');
       }
@@ -44,7 +61,7 @@ export class UserService {
 
 
 
-  // Merodo para registrar un deposito
+  // Metodo para registrar un deposito
   async addDepositoUser(id: string, newDeposito: DepositoDto) {
     try {
       // Leer el contenido del archivo JSON de forma síncrona
@@ -76,11 +93,10 @@ export class UserService {
 
 
   // Metodo para registrar una extraccion
-  async susDepositoUser(id: string, newExtraccion: ExtraccionDto) {
+  async extraccionUser(id: string, newExtraccion: ExtraccionDto) {
     try {
       const dataJson = JSON.parse(fs.readFileSync(this.userFilePath, 'utf-8'));
       const user = dataJson.find((us) => us.id === id);
-      console.log('user', user);
 
       if (!user) {
         throw new HttpException('Usuario no encontrado', 404);
@@ -90,12 +106,12 @@ export class UserService {
         throw new HttpException('Su saldo es insuficiente. Puede consultar su saldo, probar con otro monto o cancelar la operación.', 400);
       }
 
-      user.extraccion = newExtraccion.extraccion;
       user.saldoTotal -= newExtraccion.extraccion;
+      user.saldoTotal = parseFloat(user.saldoTotal.toFixed(2));
 
       fs.writeFileSync(this.userFilePath, JSON.stringify(dataJson, null, 2));
 
-      return `Su extracción de monto: $${user.extraccion} en la cuenta N° ${user.numCuenta}, fue realizado con éxito!`;
+      return `Su extracción de monto: $${newExtraccion.extraccion} en la cuenta N° ${user.numCuenta}, fue realizado con éxito!`;
 
     } catch (error) {
       if (error instanceof HttpException) {

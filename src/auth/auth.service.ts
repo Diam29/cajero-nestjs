@@ -26,7 +26,6 @@ export class AuthService {
       user: findUser,
       token,
     }
-
     return userData
   }
 }

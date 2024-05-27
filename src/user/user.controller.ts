@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { DepositoDto } from './dto/deposito.dto'
@@ -32,7 +32,7 @@ export class UserController {
   // Realizar una Extracción
   @Patch('extraccion/:id')
   realizarExtraccion(@Param('id') id: string, @Body() newExtraccion: ExtraccionDto) {
-    return this.userService.susDepositoUser(id, newExtraccion)
+    return this.userService.extraccionUser(id, newExtraccion)
   }
 
 }

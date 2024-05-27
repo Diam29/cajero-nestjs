@@ -5,10 +5,10 @@
     "lastName": "Gonzalez",
     "dni": 12345678,
     "key": 9876,
-    "numCuenta": "47983274120",
-    "deposito": 350,
-    "extraccion": 100,
-    "saldoTotal": 3762.34
+    "numCuenta": "32480238080",
+    "deposito": 1000,
+    "extraccion": 500,
+    "saldoTotal": 9642
   },
   {
     "id": "246cdE",
@@ -17,9 +17,9 @@
     "dni": 87654321,
     "key": 5678,
     "numCuenta": "93023982732",
-    "deposito": 150,
+    "deposito": 1500,
     "extraccion": 1001.9,
-    "saldoTotal": 948.4399999999999
+    "saldoTotal": 2448.43
   },
   {
     "id": "369fgH",
