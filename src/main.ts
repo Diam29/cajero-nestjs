@@ -7,7 +7,7 @@ async function bootstrap() {
     origin: 'https://cajero-front.vercel.app/',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
-    credentials: false,
+    credentials: true,
   });
   await app.listen(3000);
 }
